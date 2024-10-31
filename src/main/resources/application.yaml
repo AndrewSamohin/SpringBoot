@@ -1,14 +1,19 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+  cache:
+    type: redis
+    cache-names: redis-cache
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: 6379
+      password: YXNsa2RqbGFza2thc2RjYXZhYWN2ZHN2
   datasource:
-    url: jdbc:postgresql://localhost:5432/tasklist?currentSchema=tasklist
+    url: jdbc:postgresql://${HOST}:5432/tasklist?currentSchema=tasklist
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-  sql:
-    init:
-      mode: never
-      continue-on-error: false
-#     data-locations: classpath:demo_data.sql
   liquibase:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
@@ -18,7 +23,7 @@ mybatis:
 security:
   jwt:
     secret: aGZiYmtiYWLLYmNpZWFpZWFpZWJsZWNLY2xhZWNhaWJLbGNhZWN3Q0VCV0VXSUM=
-    access: 3600000
-    refresh: 2592000000
+    access: 1
+    refresh: 30
 springdoc:
   override-with-generic-response: false

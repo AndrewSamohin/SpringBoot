@@ -58,10 +58,10 @@ public class UserServiceImpl implements UserService {
             @Cacheable(value = "UserService::getByUsername", key = "#user.username")
     })
     public User create(User user) {
-        if(userRepository.findByUsername(user.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("Username already exists");
         }
-        if(!user.getPassword().equals(user.getPasswordConfirmation())) {
+        if (!user.getPassword().equals(user.getPasswordConfirmation())) {
             throw new IllegalStateException("Passwords and password confirmation do not match");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));

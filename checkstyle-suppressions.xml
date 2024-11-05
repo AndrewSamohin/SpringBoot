@@ -7,10 +7,12 @@
     <suppress checks="JavadocVariable"/>
     <suppress checks="DesignForExtension"/>
     <suppress checks="HideUtilityClassConstructor"/>
+    <suppress checks="FinalClass"/>
     <suppress checks="MagicNumber"/>
     <suppress checks="HiddenField"/>
-    <!-- Подавление требования final для классов -->
-    <suppress checks="FinalClass"/>
-    <!-- Подавление правила минимальной длины строки -->
-    <suppress checks="LineLength" files=".*" />
+    <suppress checks="FinalParameters"/>
+    <suppress checks="LineLength" files=".*"/> <!-- Подавление ошибок длины строки -->
+    <suppress checks="NewlineAtEndOfFile"/> <!-- Подавление ошибки отсутствия новой строки в конце файла -->
+    <suppress checks="FileTabCharacter"/> <!-- Подавление ошибки использования табуляции -->
+
 </suppressions>

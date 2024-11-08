@@ -11,10 +11,20 @@ import com.example.tasklist.web.mappers.TaskMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @RestController
 @RequestMapping("/api/v1/tasks")
@@ -29,26 +39,29 @@ public class TaskController {
     private final TaskImageMapper taskImageMapper;
 
     @PutMapping
+    @MutationMapping(name = "updateTask")
     @Operation(summary = "Update task")
     @PreAuthorize("canAccessTask(#dto.id)")
-    public TaskDto update(@Validated(OnUpdate.class) @RequestBody TaskDto dto) {
+    public TaskDto update(@Validated(OnUpdate.class) @RequestBody @Argument TaskDto dto) {
         Task task = taskMapper.toEntity(dto);
         Task updatedTask = taskService.update(task);
         return taskMapper.toDto(updatedTask);
     }
 
     @GetMapping("/{id}")
+    @QueryMapping(name = "taskById")
     @Operation(summary = "Get TaskDto by id")
     @PreAuthorize("canAccessTask(#id)")
-    public TaskDto getById(@PathVariable Long id) {
+    public TaskDto getById(@PathVariable @Argument Long id) {
         Task task = taskService.getById(id);
         return taskMapper.toDto(task);
     }
 
     @DeleteMapping("/{id}")
+    @MutationMapping(name = "deleteTask")
     @Operation(summary = "Delete task")
     @PreAuthorize("canAccessTask(#id)")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable @Argument Long id) {
         taskService.delete(id);
     }
 

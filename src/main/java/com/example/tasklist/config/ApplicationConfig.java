@@ -106,7 +106,9 @@ public class ApplicationConfig {
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/graphiql").permitAll()
                         .anyRequest().authenticated())  // Остальные запросы требуют аутентификации
+                .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);  // Добавляем JWT фильтр
 
         return httpSecurity.build();

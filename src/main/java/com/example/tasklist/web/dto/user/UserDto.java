@@ -5,10 +5,12 @@ import com.example.tasklist.web.dto.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-@Data
+@Getter
+@Setter
 @Schema(description = "User DTO")
 public class UserDto {
 

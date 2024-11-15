@@ -7,6 +7,7 @@ import com.example.tasklist.web.dto.auth.JwtRequest;
 import com.example.tasklist.web.dto.auth.JwtResponse;
 import com.example.tasklist.web.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
+    @Autowired
     private final AuthenticationManager authenticationManager;
+
+    @Autowired
     private final UserService userService;
+
+    @Autowired
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
@@ -27,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
         jwtResponse.setId(user.getId());
         jwtResponse.setUsername(user.getUsername());
         jwtResponse.setAccessToken(jwtTokenProvider.createAccessToken(user.getId(), user.getUsername(), user.getRoles()));
-        jwtResponse.setRefreshToken(jwtTokenProvider.createrefreshToken(user.getId(), user.getUsername()));
+        jwtResponse.setRefreshToken(jwtTokenProvider.createRefreshToken(user.getId(), user.getUsername()));
         return jwtResponse;
     }
 

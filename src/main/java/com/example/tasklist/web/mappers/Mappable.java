@@ -10,6 +10,4 @@ public interface Mappable<E, D> {
 
     E toEntity(D dto);
 
-    List<E> toEntity(List<D> dtos);
-
 }

@@ -1,4 +1,6 @@
 spring:
+  freemarker:
+    template-loader-path: classpath:/templates/
   config:
     import: optional:file:.env[.properties]
   cache:

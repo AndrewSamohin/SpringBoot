@@ -8,7 +8,7 @@ import java.util.Properties;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "spring.mal")
+@ConfigurationProperties(prefix = "spring.mail")
 public class MailProperties {
 
     private String host;

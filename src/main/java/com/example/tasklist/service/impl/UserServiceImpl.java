@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         existing.setName(user.getName());
         user.setUsername(user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        user = userRepository.save(user);
         return user;
     }
 
@@ -75,7 +75,8 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User already exists");
         }
-        if (!user.getPassword().equals(user.getPasswordConfirmation())) {
+        if (user.getPassword() == null || user.getPasswordConfirmation() == null ||
+                !user.getPassword().equals(user.getPasswordConfirmation())) {
             throw new IllegalStateException("Passwords and password confirmation do not match");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));

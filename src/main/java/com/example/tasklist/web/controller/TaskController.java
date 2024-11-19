@@ -29,12 +29,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @RestController
 @RequestMapping("/api/v1/tasks")
 @RequiredArgsConstructor
-@Validated
 @Tag(name = "Task Controller", description = "Task API")
 public class TaskController {
 
     private final TaskService taskService;
-
     private final TaskMapper taskMapper;
     private final TaskImageMapper taskImageMapper;
 

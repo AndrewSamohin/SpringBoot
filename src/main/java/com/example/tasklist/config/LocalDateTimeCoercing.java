@@ -8,6 +8,7 @@ import graphql.schema.Coercing;
 import graphql.schema.CoercingParseLiteralException;
 import graphql.schema.CoercingParseValueException;
 import graphql.schema.CoercingSerializeException;
+import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,6 +22,7 @@ public class LocalDateTimeCoercing implements Coercing<LocalDateTime, String> {
 
     @Nullable
     @Override
+    @SneakyThrows
     public String serialize(
             @NotNull Object dataFetcherResult,
             @NotNull GraphQLContext graphQLContext,
@@ -38,6 +40,7 @@ public class LocalDateTimeCoercing implements Coercing<LocalDateTime, String> {
 
     @Nullable
     @Override
+    @SneakyThrows
     public LocalDateTime parseValue(
             @NotNull Object input,
             @NotNull GraphQLContext graphQLContext,
@@ -48,6 +51,7 @@ public class LocalDateTimeCoercing implements Coercing<LocalDateTime, String> {
 
     @Nullable
     @Override
+    @SneakyThrows
     public LocalDateTime parseLiteral(
             @NotNull Value<?> input,
             @NotNull CoercedVariables variables,

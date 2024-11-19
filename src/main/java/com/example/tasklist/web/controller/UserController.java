@@ -38,7 +38,6 @@ public class UserController {
 
     private final UserService userService;
     private final TaskService taskService;
-
     private final UserMapper userMapper;
     private final TaskMapper taskMapper;
 
